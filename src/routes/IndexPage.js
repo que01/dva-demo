@@ -17,7 +17,9 @@ class App extends Component {
         <Col span={6}>
           <Silder />
         </Col>
-        <Col span={18}>内容区域</Col>
+        <Col span={18}>
+          {this.props.children||'内容区域'}
+        </Col>
       </Row>
     )
   }
