@@ -26,7 +26,7 @@ class App extends Component {
     return(
       <Row style={{width:'1000px',margin:'0 auto'}}>
         <Col span={24}>
-          <CustomBreadcrumb data={breadcrumbData} />
+          <CustomBreadcrumb data={this.props.common.breadcrumb} />
         </Col>
         <Col span={6}>
           <Silder />
@@ -39,4 +39,7 @@ class App extends Component {
   }
 }
 
-export default connect()(App) ;
+function mapStateToProps({ common }) {
+  return {common};
+}
+export default connect(mapStateToProps)(App);

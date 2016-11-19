@@ -5,6 +5,8 @@ import dva from 'dva';
 // 1. Initialize
 const app = dva();
 
+app.model(require("./models/common"));
+
 // 2. Plugins
 //app.use({});
 
