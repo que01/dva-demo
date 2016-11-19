@@ -1,4 +1,5 @@
 const webpack = require('atool-build/lib/webpack');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = function(webpackConfig, env) {
   webpackConfig.babel.plugins.push('transform-runtime');
@@ -9,6 +10,19 @@ module.exports = function(webpackConfig, env) {
     webpackConfig.babel.plugins.push('dva-hmr');
   } else {
     webpackConfig.babel.plugins.push('dev-expression');
+    webpackConfig.plugins.push(
+      new HtmlWebpackPlugin({
+        inject: false,
+        template: require('html-webpack-template'),
+        title: 'Dva Demo',
+        appMountId: 'root',
+        minify: {
+          removeComments: true,
+          collapseWhitespace: true
+        },
+        links:['//at.alicdn.com/t/font_xxxxxxxx.css']
+      })
+    );
   }
 
   // Don't extract common.js and common.css
