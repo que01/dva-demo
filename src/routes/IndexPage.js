@@ -5,7 +5,7 @@ import styles from './IndexPage.css';
 
 import Silder from '../components/Silder'
 
-import { Row, Col } from 'antd';
+import { Row, Col, Breadcrumb } from 'antd';
 
 class App extends Component {
   constructor(props){
@@ -14,6 +14,14 @@ class App extends Component {
   render(){
     return(
       <Row style={{width:'1000px',margin:'0 auto'}}>
+        <Col span={24}>
+          <Breadcrumb>
+            <Breadcrumb.Item>Home</Breadcrumb.Item>
+            <Breadcrumb.Item><a href="">Application Center</a></Breadcrumb.Item>
+            <Breadcrumb.Item><a href="">Application List</a></Breadcrumb.Item>
+            <Breadcrumb.Item>An Application</Breadcrumb.Item>
+          </Breadcrumb>
+        </Col>
         <Col span={6}>
           <Silder />
         </Col>
