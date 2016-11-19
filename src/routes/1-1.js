@@ -17,47 +17,54 @@ const columns = [
     dataIndex: 'address',
     key: 'address',
   }, {
-    title: 'Action',
-    key: 'action',
-    render: (text, record) => (
-      <span>
-        <a href="#">Action 一 {record.name}</a>
-        <span className="ant-divider" />
-        <a href="#">Delete</a>
-        <span className="ant-divider" />
-        <a href="#" className="ant-dropdown-link">
-          More actions<Icon type="down" />
-        </a>
-      </span>
-    ),
+    title: 'LastLogin',
+    dataIndex: 'lastLogin',
+    key: 'lastLogin',
   }
 ];
 
-const data = [
-  {
-    key: '1',
-    name: 'John Brown',
-    age: 32,
-    address: 'New York No. 1 Lake Park',
-  }, {
-    key: '2',
-    name: 'Jim Green',
-    age: 42,
-    address: 'London No. 1 Lake Park',
-  }, {
-    key: '3',
-    name: 'Joe Black',
-    age: 32,
-    address: 'Sidney No. 1 Lake Park',
-  }
-];
 
 class Option extends React.Component{
   constructor(props){
     super(props)
   }
   render(){
-    return (<Table columns={columns} dataSource={data} />)
+    let {data,loading} = this.props.test.list;
+    let pagination = this.props.test.pagination;
+    return (
+      <Table
+        columns={columns}
+        dataSource={data}
+        pagination={pagination}
+        onChange={this.handleTableChange.bind(this)}
+        loading={loading}
+      />
+    )
+  }
+  handleTableChange(pagination, filters, sorter){
+    this.props.dispatch({
+      type:'test/changePage',
+      payload:{
+        pagination:{
+          current:pagination.current,
+          pageSize:pagination.pageSize,
+          showQuickJumper: true,
+          loading:true
+        }
+      }
+    });
+    this.fetch(pagination.current)
+  }
+  fetch(current){
+    // 更新列表
+    this.props.dispatch({
+      type:'test/fetchRemote',
+      payload:{
+        current:current,
+        pageSize:10,
+        loading:false,
+      }
+    });
   }
   componentDidMount(){
     const breadcrumbData = {
@@ -73,10 +80,11 @@ class Option extends React.Component{
     this.props.dispatch({
       type:'common/changeBreadcrumb',
       payload:breadcrumbData
-    })
+    });
+    this.fetch(1);
   }
 }
-function mapStateToProps({ common }) {
-  return {common};
+function mapStateToProps({ common,test }) {
+  return {common,test};
 }
 export default connect(mapStateToProps)(Option);

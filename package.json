@@ -6,8 +6,13 @@
   "dependencies": {
     "antd": "^2.4.3",
     "dva": "^1.1.0",
+    "merge-object": "^1.0.0",
+    "mockjs": "^1.0.1-beta3",
+    "object-to-formdata": "^1.0.7",
+    "qs": "^6.3.0",
     "react": "^15.3.2",
-    "react-dom": "^15.3.2"
+    "react-dom": "^15.3.2",
+    "safe-eval": "^0.3.0"
   },
   "devDependencies": {
     "atool-build": "^0.9.0",

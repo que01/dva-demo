@@ -18,6 +18,5 @@ export default function({ history }) {
         <Route path="34" component={require('./routes/3-4.js')} />
       </Route>
     </Router>
-
   );
 };

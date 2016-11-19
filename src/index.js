@@ -7,6 +7,8 @@ const app = dva();
 
 app.model(require("./models/common"));
 
+app.model(require("./models/11"));
+
 // 2. Plugins
 //app.use({});
 
