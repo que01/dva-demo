@@ -4,8 +4,19 @@ import { Link } from 'dva/router';
 import styles from './IndexPage.css';
 
 import Silder from '../components/Silder'
+import CustomBreadcrumb from '../components/breadcrumb'
 
-import { Row, Col, Breadcrumb } from 'antd';
+import { Row, Col } from 'antd';
+
+const breadcrumbData = [
+    {
+      name:'首页',
+      path:'/'
+    },{
+      name:'菜单21',
+      path:'/21'
+    }
+];
 
 class App extends Component {
   constructor(props){
@@ -15,12 +26,7 @@ class App extends Component {
     return(
       <Row style={{width:'1000px',margin:'0 auto'}}>
         <Col span={24}>
-          <Breadcrumb>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item><a href="">Application Center</a></Breadcrumb.Item>
-            <Breadcrumb.Item><a href="">Application List</a></Breadcrumb.Item>
-            <Breadcrumb.Item>An Application</Breadcrumb.Item>
-          </Breadcrumb>
+          <CustomBreadcrumb data={breadcrumbData} />
         </Col>
         <Col span={6}>
           <Silder />
