@@ -1,7 +1,10 @@
 {
   "private": true,
   "entry": {
-    "index": "./src/index.js"
+    "index": "./src/index.js",
+    "common": [
+      "react"
+    ]
   },
   "dependencies": {
     "antd": "^2.4.3",
