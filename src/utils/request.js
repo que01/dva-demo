@@ -3,7 +3,7 @@ import safeeval from 'safe-eval'
 import Mock from 'mockjs';
 
 function parseText(response) {
-  return response.text();
+  return response.json();
 }
 
 function checkStatus(response) {
@@ -20,20 +20,12 @@ function checkStatus(response) {
  *
  * @param  {string} url       The URL we want to request
  * @param  {object} [options] The options we want to pass to "fetch"
- * @param  {boolean} rap       是否是rap请求 true是 false 否
  * @return {object}           An object containing either "data" or "err"
  */
-export default function request(url, options,rap) {
-  if(!rap){rap = false;}
+export default function request(url, options) {
   return fetch(url, options)
     .then(checkStatus)
     .then(parseText)
-    .then((data) => {
-      if(rap){
-        return Mock.mock(safeeval(data))
-      }else{
-        return safeeval(data)
-      }
-    })
+    .then((data) => ({ data }))
     .catch((err) => ({ err }));
 }

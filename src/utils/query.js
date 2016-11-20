@@ -21,23 +21,18 @@ function getUrl(smarturl,flag) {
   }
 }
 
-async function POST(url,params,rapFlag,isJson){
+async function POST(url,params,isJson){
   if(isJson == undefined){isJson = false};
-  return request( getUrl(url,rapFlag),rapFlag?{  //如果为rap请求 就去掉 credentials: 'include'来允许跨域
-    method: 'POST',
-    body:isJson?JSON.stringify(params):FormdataWrapper(params),
-  }:merge({
+  return request( url,merge({
     method: 'POST',
     body:isJson?JSON.stringify(params):FormdataWrapper(params),
   },isJson?merge(jsonConf,cookieTrue):cookieTrue),rapFlag);
 }
 
-async function GET(url,params,rapFlag){
-  return request( getUrl(url,rapFlag) + `?${qs.stringify(params)}`,rapFlag?{
+async function GET(url,params){
+  return request( url + `?${qs.stringify(params)}`,merge({
     method: 'GET',
-  }:merge({
-    method: 'GET',
-  },cookieTrue),rapFlag);
+  },cookieTrue));
 }
 
 export {

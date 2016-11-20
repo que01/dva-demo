@@ -1,8 +1,6 @@
 import { GET } from '../utils/query'
 import { rapFlag, onlinePath } from '../config/config';
-
 const API = 'member/list'
-
 export default {
   namespace: 'test',
   state: {
@@ -27,7 +25,7 @@ export default {
       let { data } = yield call(GET,API,{
         pageNum:current,
         pageSize:pageSize,
-      },rapFlag);
+      });
       if (data) {
         yield put({
           type: 'fetchList',
